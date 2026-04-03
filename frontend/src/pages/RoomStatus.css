@@ -1,0 +1,100 @@
+.date-picker-wrapper input {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.legend {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.color-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.color-box.available { background-color: var(--success); opacity: 0.2; border: 1px solid var(--success); }
+.color-box.booked { background-color: var(--danger); opacity: 0.2; border: 1px solid var(--danger); }
+.color-box.maintenance { background-color: var(--text-muted); opacity: 0.2; border: 1px solid var(--text-muted); }
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.room-block {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s;
+}
+
+.room-block:hover {
+  transform: translateY(-4px);
+}
+
+.room-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.room-block.available::before { background-color: var(--success); opacity: 0.1; }
+.room-block.available { border-top: 3px solid var(--success); }
+
+.room-block.booked::before { background-color: var(--danger); opacity: 0.1; }
+.room-block.booked { border-top: 3px solid var(--danger); }
+
+.room-block.maintenance::before { background-color: var(--text-muted); opacity: 0.1; }
+.room-block.maintenance { border-top: 3px solid var(--text-muted); }
+
+.room-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+}
+
+.room-category {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.room-status-label {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.available .room-status-label { color: var(--success); }
+.booked .room-status-label { color: var(--danger); }
+.maintenance .room-status-label { color: var(--text-muted); }
