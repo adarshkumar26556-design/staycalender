@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "MERN Stack Root",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "cd backend && npm run dev",
-    "client": "cd frontend && npm run dev",
+    "start": "node backend/server.js",
+    "server": "cd backend && npm start",
+    "build": "npm run install-all && cd frontend && npm run build",
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
   },
   "dependencies": {
