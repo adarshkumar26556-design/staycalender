@@ -17,14 +17,19 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/properties', propertyRoutes);
-app.use('/api/rooms', roomRoutes);
-app.use('/api/bookings', bookingRoutes);
+const mainRouter = express.Router();
+mainRouter.use('/auth', authRoutes);
+mainRouter.use('/properties', propertyRoutes);
+mainRouter.use('/rooms', roomRoutes);
+mainRouter.use('/bookings', bookingRoutes);
 
-app.get('/api/status', (req, res) => {
+mainRouter.get('/status', (req, res) => {
   res.json({ status: 'API is running smoothly with Booking System!' });
 });
+
+// Handle both /api/... and /...
+app.use('/api', mainRouter);
+app.use('/', mainRouter);
 
 // Serve static files from the frontend/dist directory
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
