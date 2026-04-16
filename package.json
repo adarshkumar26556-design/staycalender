@@ -1,17 +1,40 @@
 {
-  "name": "staycalender-mern",
+  "name": "staycalender",
+  "private": true,
   "version": "1.0.0",
-  "description": "MERN Stack Root",
+  "type": "module",
   "scripts": {
-    "start": "node backend/server.js",
-    "server": "cd backend && npm start",
-    "build": "npm run install-all && cd frontend && npm run build",
-    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server": "node api/index.cjs",
+    "seed": "node api/seed.js"
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^1.7.0",
+    "mongoose": "^9.3.3",
+    "react": "^19.2.4",
+    "react-date-range": "^2.0.1",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.2"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@eslint/js": "^9.39.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "nodemon": "^3.1.14",
+    "vite": "^8.0.1"
   }
 }
