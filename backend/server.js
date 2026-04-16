@@ -30,7 +30,7 @@ app.get('/api/status', (req, res) => {
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // The "catch-all" handler: for any request that doesn't match an API route, send back React's index.html file.
-app.get('*', (req, res) => {
+app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
