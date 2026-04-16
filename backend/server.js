@@ -17,26 +17,13 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-const mainRouter = express.Router();
-mainRouter.use('/auth', authRoutes);
-mainRouter.use('/properties', propertyRoutes);
-mainRouter.use('/rooms', roomRoutes);
-mainRouter.use('/bookings', bookingRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/properties', propertyRoutes);
+app.use('/api/rooms', roomRoutes);
+app.use('/api/bookings', bookingRoutes);
 
-mainRouter.get('/status', (req, res) => {
-  res.json({ status: 'API is running smoothly with Booking System!' });
-});
-
-// Handle both /api/... and /...
-app.use('/api', mainRouter);
-app.use('/', mainRouter);
-
-// Serve static files from the frontend/dist directory
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-// The "catch-all" handler: for any request that doesn't match an API route, send back React's index.html file.
-app.get('/{*splat}', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+app.get('/api/status', (req, res) => {
+  res.json({ status: 'API is running smoothly!' });
 });
 
 // Database Connection
@@ -46,6 +33,12 @@ mongoose.connect(uri)
   .catch(err => console.error('MongoDB connection error:', err));
 
 if (process.env.NODE_ENV !== 'production') {
+  // Local static serving
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+  app.get('/{*splat}', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+  });
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
