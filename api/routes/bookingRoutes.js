@@ -121,4 +121,22 @@ router.get('/:propertyId/revenue', authMiddleware, async (req, res) => {
   }
 });
 
+// Delete Booking
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+
+    // Check access
+    if (req.user.role !== 'Admin' && req.user.propertyId !== booking.propertyId.toString()) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    await Booking.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Booking deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

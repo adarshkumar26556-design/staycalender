@@ -11,6 +11,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Admin Panel', path: '/admin', icon: <Settings size={20} /> }
   ] : [
     { name: 'Calendar', path: '/', icon: <CalendarIcon size={20} /> },
+    { name: 'Bookings', path: '/bookings', icon: <Building2 size={20} /> },
     { name: 'Room Status', path: '/status', icon: <LayoutDashboard size={20} /> },
     { name: 'Revenue', path: '/revenue', icon: <IndianRupee size={20} /> },
   ];

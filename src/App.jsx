@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import CalendarView from './pages/CalendarView';
 import RoomStatus from './pages/RoomStatus';
 import Revenue from './pages/Revenue';
+import Bookings from './pages/Bookings';
 import AdminPanel from './pages/AdminPanel';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -52,6 +53,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Revenue />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/bookings" 
+        element={
+          <ProtectedRoute>
+            <Bookings />
           </ProtectedRoute>
         } 
       />
