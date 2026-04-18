@@ -8,19 +8,17 @@ import RoomStatus from './pages/RoomStatus';
 import Revenue from './pages/Revenue';
 import AdminPanel from './pages/AdminPanel';
 
+import Bookings from './pages/Bookings';
+
 const ProtectedRoute = ({ children, requiredRole }) => {
   const { user } = useContext(AuthContext);
-  const location = window.location.pathname;
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (user.role === 'Admin' && location !== '/admin') {
-    return <Navigate to="/admin" replace />;
-  }
-
-  if (user.role !== 'Admin' && requiredRole === 'Admin') {
+  // If a specific role is required (like Admin), check it
+  if (requiredRole && user.role !== requiredRole) {
     return <Navigate to="/" replace />;
   }
 
@@ -36,6 +34,14 @@ function App() {
         element={
           <ProtectedRoute>
             <CalendarView />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/bookings" 
+        element={
+          <ProtectedRoute>
+            <Bookings />
           </ProtectedRoute>
         } 
       />

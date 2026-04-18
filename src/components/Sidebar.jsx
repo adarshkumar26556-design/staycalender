@@ -1,19 +1,23 @@
 import { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LayoutDashboard, Calendar as CalendarIcon, IndianRupee, Settings, LogOut, ChevronLeft, ChevronRight, Building2 } from 'lucide-react';
+import { LayoutDashboard, Calendar as CalendarIcon, ClipboardList, IndianRupee, Settings, LogOut, ChevronLeft, ChevronRight, Building2, BedDouble } from 'lucide-react';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
 
-  const navItems = user?.role === 'Admin' ? [
-    { name: 'Admin Panel', path: '/admin', icon: <Settings size={20} /> }
-  ] : [
+  const commonItems = [
     { name: 'Calendar', path: '/', icon: <CalendarIcon size={20} /> },
-    { name: 'Room Status', path: '/status', icon: <LayoutDashboard size={20} /> },
+    { name: 'Bookings', path: '/bookings', icon: <ClipboardList size={20} /> },
+    { name: 'Room Status', path: '/status', icon: <BedDouble size={20} /> },
     { name: 'Revenue', path: '/revenue', icon: <IndianRupee size={20} /> },
   ];
+
+  const navItems = user?.role === 'Admin' ? [
+    { name: 'Admin Panel', path: '/admin', icon: <Settings size={20} /> },
+    ...commonItems
+  ] : commonItems;
 
   return (
     <aside className={`sidebar glass-panel ${isOpen ? 'open' : 'closed'}`}>
