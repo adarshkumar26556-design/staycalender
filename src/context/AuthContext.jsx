@@ -31,14 +31,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         setUser(data.user);
-        
-        // Conditional navigation based on role
-        if (data.user.role === 'Admin') {
-          navigate('/admin');
-        } else {
-          navigate('/bookings');
-        }
-        
+        navigate('/');
         return { success: true };
       } else {
         return { success: false, message: data.message };
