@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../utils/api';
-import { Plus, Users, LayoutDashboard, DoorOpen } from 'lucide-react';
+import { Plus, Users, LayoutDashboard, DoorOpen, Trash2 } from 'lucide-react';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
@@ -64,6 +64,22 @@ const AdminPanel = () => {
     } catch (err) { alert(err.message); }
   };
 
+  const handleDeleteProperty = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this property? All associated owners will also be removed.')) return;
+    try {
+      await apiFetch(`/properties/${id}`, 'DELETE');
+      fetchData();
+    } catch (err) { alert(err.message); }
+  };
+
+  const handleDeleteRoom = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this room?')) return;
+    try {
+      await apiFetch(`/rooms/${id}`, 'DELETE');
+      fetchData();
+    } catch (err) { alert(err.message); }
+  };
+
   if (loading) return <div className="page-header">Loading...</div>;
 
   return (
@@ -99,12 +115,21 @@ const AdminPanel = () => {
             <h3 className="mt-8">Existing Properties</h3>
             <div className="table-wrapper">
               <table className="data-table">
-                <thead><tr><th>Name</th><th>Location</th><th>ID</th></tr></thead>
+                <thead><tr><th>Name</th><th>Location</th><th>ID</th><th>Actions</th></tr></thead>
                 <tbody>
                   {properties.map(p => (
-                    <tr key={p._id}><td>{p.name}</td><td>{p.address}</td><td className="text-muted">{p._id}</td></tr>
+                    <tr key={p._id}>
+                      <td>{p.name}</td>
+                      <td>{p.address}</td>
+                      <td className="text-muted">{p._id}</td>
+                      <td>
+                        <button className="icon-btn text-danger" onClick={() => handleDeleteProperty(p._id)}>
+                          <Trash2 size={16} />
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-                  {properties.length === 0 && <tr><td colSpan="3">No properties found</td></tr>}
+                  {properties.length === 0 && <tr><td colSpan="4">No properties found</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -137,7 +162,7 @@ const AdminPanel = () => {
                     <th>Room No.</th>
                     <th>Category</th>
                     <th>Status</th>
-                    <th>Created At</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -147,8 +172,10 @@ const AdminPanel = () => {
                       <td>{r.roomNumber}</td>
                       <td>{r.category}</td>
                       <td><span className={`text-${r.status === 'available' ? 'success' : 'muted'}`}>{r.status}</span></td>
-                      <td className="text-muted">
-                        {new Date(r.createdAt).toLocaleString()}
+                      <td>
+                        <button className="icon-btn text-danger" onClick={() => handleDeleteRoom(r._id)}>
+                          <Trash2 size={16} />
+                        </button>
                       </td>
                     </tr>
                   ))}

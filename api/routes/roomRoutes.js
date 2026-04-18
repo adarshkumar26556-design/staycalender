@@ -53,4 +53,14 @@ router.patch('/:id/status', authMiddleware, adminMiddleware, async (req, res) =>
   }
 });
 
+// Admin: Delete Room
+router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    await Room.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Room deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

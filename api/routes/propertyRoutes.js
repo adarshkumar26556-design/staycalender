@@ -56,4 +56,18 @@ router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
+// Admin: Delete Property
+router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    // Delete property
+    await Property.findByIdAndDelete(req.params.id);
+    // Also delete associated owners for this property (optional cleanup)
+    await User.deleteMany({ propertyId: req.params.id, role: 'Owner' });
+    
+    res.json({ message: 'Property and associated owner accounts deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
