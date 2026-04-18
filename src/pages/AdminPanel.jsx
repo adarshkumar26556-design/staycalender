@@ -97,15 +97,17 @@ const AdminPanel = () => {
             </form>
             
             <h3 className="mt-8">Existing Properties</h3>
-            <table className="data-table">
-              <thead><tr><th>Name</th><th>Location</th><th>ID</th></tr></thead>
-              <tbody>
-                {properties.map(p => (
-                  <tr key={p._id}><td>{p.name}</td><td>{p.address}</td><td className="text-muted">{p._id}</td></tr>
-                ))}
-                {properties.length === 0 && <tr><td colSpan="3">No properties found</td></tr>}
-              </tbody>
-            </table>
+            <div className="table-wrapper">
+              <table className="data-table">
+                <thead><tr><th>Name</th><th>Location</th><th>ID</th></tr></thead>
+                <tbody>
+                  {properties.map(p => (
+                    <tr key={p._id}><td>{p.name}</td><td>{p.address}</td><td className="text-muted">{p._id}</td></tr>
+                  ))}
+                  {properties.length === 0 && <tr><td colSpan="3">No properties found</td></tr>}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
@@ -127,31 +129,33 @@ const AdminPanel = () => {
             </form>
 
             <h3 className="mt-8">Existing Rooms</h3>
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>Property</th>
-                  <th>Room No.</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th>Created At</th>
-                </tr>
-              </thead>
-              <tbody>
-                {allRooms.map(r => (
-                  <tr key={r._id}>
-                    <td>{r.propertyId?.name || 'N/A'}</td>
-                    <td>{r.roomNumber}</td>
-                    <td>{r.category}</td>
-                    <td><span className={`text-${r.status === 'available' ? 'success' : 'muted'}`}>{r.status}</span></td>
-                    <td className="text-muted">
-                      {new Date(r.createdAt).toLocaleString()}
-                    </td>
+            <div className="table-wrapper">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Room No.</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Created At</th>
                   </tr>
-                ))}
-                {allRooms.length === 0 && <tr><td colSpan="5">No rooms found</td></tr>}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {allRooms.map(r => (
+                    <tr key={r._id}>
+                      <td>{r.propertyId?.name || 'N/A'}</td>
+                      <td>{r.roomNumber}</td>
+                      <td>{r.category}</td>
+                      <td><span className={`text-${r.status === 'available' ? 'success' : 'muted'}`}>{r.status}</span></td>
+                      <td className="text-muted">
+                        {new Date(r.createdAt).toLocaleString()}
+                      </td>
+                    </tr>
+                  ))}
+                  {allRooms.length === 0 && <tr><td colSpan="5">No rooms found</td></tr>}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

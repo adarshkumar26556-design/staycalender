@@ -237,18 +237,37 @@
     transform: translateX(-100%);
     width: 260px !important;
   }
+
   .sidebar.open {
     transform: translateX(0);
     box-shadow: 4px 0 24px rgba(0,0,0,0.5);
   }
+
   .main-content-wrapper.sidebar-open,
   .main-content-wrapper.sidebar-closed {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
+
   .topnav {
     padding: 0 1rem;
   }
+
   .main-content {
     padding: 1rem;
   }
+
+  /* Dark overlay when sidebar open on mobile */
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 40;
+    animation: fadeIn 0.2s ease;
+  }
+}
+
+/* Hide overlay on desktop */
+.mobile-overlay {
+  display: none;
 }

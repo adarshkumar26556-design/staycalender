@@ -34,6 +34,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             to={item.path}
             className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
             title={!isOpen ? item.name : ''}
+            onClick={() => { if (window.innerWidth <= 768) setIsOpen(false); }}
           >
             <span className="nav-icon">{item.icon}</span>
             {isOpen && <span className="nav-label">{item.name}</span>}

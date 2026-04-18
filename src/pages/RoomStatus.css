@@ -98,3 +98,33 @@
 .available .room-status-label { color: var(--success); }
 .booked .room-status-label { color: var(--danger); }
 .maintenance .room-status-label { color: var(--text-muted); }
+
+@media (max-width: 768px) {
+  .legend {
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .room-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .room-block {
+    padding: 1rem;
+  }
+
+  .room-number {
+    font-size: 2rem;
+  }
+
+  .date-picker-wrapper {
+    width: 100%;
+  }
+
+  .date-picker-wrapper input {
+    width: 100%;
+  }
+}
