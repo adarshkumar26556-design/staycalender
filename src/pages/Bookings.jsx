@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { apiFetch } from '../utils/api';
-import { Trash2, Search, Calendar, User } from 'lucide-react';
+import { Trash2, Search, Calendar, User, Edit2, X, Save } from 'lucide-react';
 import './AdminPanel.css'; // Reusing established table styles
 
 const Bookings = () => {
@@ -9,6 +9,20 @@ const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  
+  // Edit State
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingBooking, setEditingBooking] = useState(null);
+  const [editFormData, setEditFormData] = useState({
+    customerName: '',
+    mobileNumber: '',
+    numberOfGuests: 1,
+    checkInDate: '',
+    checkOutDate: '',
+    source: 'Walk-in',
+    amount: 0,
+    notes: ''
+  });
 
   useEffect(() => {
     fetchBookings();
@@ -18,8 +32,6 @@ const Bookings = () => {
     if (!user?.propertyId && user?.role !== 'Admin') return;
     setLoading(true);
     try {
-      // For owners, use their propertyId. For admins, we might need a different logic but usually they pick a property.
-      // For now, let's assume propertyId is known or handled.
       const propId = user.propertyId;
       const data = await apiFetch(`/bookings/${propId}`);
       setBookings(data);
@@ -34,6 +46,33 @@ const Bookings = () => {
     try {
       await apiFetch(`/bookings/${id}`, 'DELETE');
       setBookings(bookings.filter(b => b._id !== id));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const openEditModal = (booking) => {
+    setEditingBooking(booking);
+    setEditFormData({
+      customerName: booking.customerName,
+      mobileNumber: booking.mobileNumber,
+      numberOfGuests: booking.numberOfGuests,
+      checkInDate: new Date(booking.checkInDate).toISOString().split('T')[0],
+      checkOutDate: new Date(booking.checkOutDate).toISOString().split('T')[0],
+      source: booking.source,
+      amount: booking.amount,
+      notes: booking.notes || ''
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const updated = await apiFetch(`/bookings/${editingBooking._id}`, 'PATCH', editFormData);
+      setBookings(bookings.map(b => b._id === updated._id ? { ...b, ...updated } : b));
+      setIsEditModalOpen(false);
+      alert('Booking updated successfully');
     } catch (err) {
       alert(err.message);
     }
@@ -109,9 +148,14 @@ const Bookings = () => {
                   </td>
                   <td style={{ fontWeight: 600 }}>₹{b.amount}</td>
                   <td>
-                    <button className="icon-btn text-danger" onClick={() => handleDelete(b._id)}>
-                      <Trash2 size={18} />
-                    </button>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button className="icon-btn" onClick={() => openEditModal(b)} title="Edit">
+                        <Edit2 size={18} />
+                      </button>
+                      <button className="icon-btn text-danger" onClick={() => handleDelete(b._id)} title="Delete">
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -126,6 +170,102 @@ const Bookings = () => {
           </table>
         </div>
       </div>
+
+      {isEditModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content glass-panel" style={{ maxWidth: '600px' }}>
+            <div className="modal-header">
+              <h3>Edit Booking - Room {editingBooking?.roomId?.roomNumber}</h3>
+              <button onClick={() => setIsEditModalOpen(false)} className="icon-btn">
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleUpdate} className="modal-body">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="input-group">
+                  <label>Guest Name</label>
+                  <input 
+                    type="text" 
+                    value={editFormData.customerName}
+                    onChange={e => setEditFormData({...editFormData, customerName: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Mobile Number</label>
+                  <input 
+                    type="text" 
+                    value={editFormData.mobileNumber}
+                    onChange={e => setEditFormData({...editFormData, mobileNumber: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Check In</label>
+                  <input 
+                    type="date" 
+                    value={editFormData.checkInDate}
+                    onChange={e => setEditFormData({...editFormData, checkInDate: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Check Out</label>
+                  <input 
+                    type="date" 
+                    value={editFormData.checkOutDate}
+                    onChange={e => setEditFormData({...editFormData, checkOutDate: e.target.value})}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Guests</label>
+                  <input 
+                    type="number" 
+                    value={editFormData.numberOfGuests}
+                    onChange={e => setEditFormData({...editFormData, numberOfGuests: parseInt(e.target.value)})}
+                    required
+                  />
+                </div>
+                <div className="input-group">
+                  <label>Source</label>
+                  <select 
+                    value={editFormData.source}
+                    onChange={e => setEditFormData({...editFormData, source: e.target.value})}
+                  >
+                    <option value="Walk-in">Walk-in</option>
+                    <option value="OTA">OTA (Booking/Expedia)</option>
+                    <option value="Direct">Direct Call</option>
+                  </select>
+                </div>
+                <div className="input-group">
+                  <label>Total Amount (₹)</label>
+                  <input 
+                    type="number" 
+                    value={editFormData.amount}
+                    onChange={e => setEditFormData({...editFormData, amount: parseInt(e.target.value)})}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="input-group" style={{ marginTop: '1rem' }}>
+                <label>Notes</label>
+                <textarea 
+                  rows="2"
+                  value={editFormData.notes}
+                  onChange={e => setEditFormData({...editFormData, notes: e.target.value})}
+                ></textarea>
+              </div>
+              <div className="modal-footer" style={{ marginTop: '2rem' }}>
+                <button type="button" onClick={() => setIsEditModalOpen(false)} className="btn btn-secondary">Cancel</button>
+                <button type="submit" className="btn btn-primary">
+                  <Save size={18} /> Update Booking
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

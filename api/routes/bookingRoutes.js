@@ -139,4 +139,36 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// Update Booking
+router.patch('/:id', authMiddleware, async (req, res) => {
+  try {
+    const { customerName, mobileNumber, numberOfGuests, checkInDate, checkOutDate, source, amount, notes } = req.body;
+    
+    const booking = await Booking.findById(req.params.id);
+    if (!booking) return res.status(404).json({ message: 'Booking not found' });
+
+    // Check access
+    if (req.user.role !== 'Admin' && req.user.propertyId !== booking.propertyId.toString()) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    const updatedData = {
+      customerName, 
+      mobileNumber, 
+      numberOfGuests,
+      source,
+      amount,
+      notes
+    };
+
+    if (checkInDate) updatedData.checkInDate = new Date(checkInDate);
+    if (checkOutDate) updatedData.checkOutDate = new Date(checkOutDate);
+
+    const updatedBooking = await Booking.findByIdAndUpdate(req.params.id, updatedData, { new: true });
+    res.json(updatedBooking);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;
