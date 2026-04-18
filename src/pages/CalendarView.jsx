@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { apiFetch } from '../utils/api';
-import { ChevronLeft, ChevronRight, X, Calendar as CalIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Calendar as CalIcon, Trash2 } from 'lucide-react';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import 'react-date-range/dist/styles.css';
@@ -15,6 +15,7 @@ const CalendarView = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedBooking, setSelectedBooking] = useState(null);
   
   const [rooms, setRooms] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -107,6 +108,7 @@ const CalendarView = () => {
     const nextDateString = offsetNextDay.toISOString().split('T')[0];
     
     setSelectedDate(clickedDate);
+    setSelectedBooking(null);
     // Reset form for new booking, keeping dates relative to the clicked day
     setFormData({
       roomId: '', 
@@ -128,6 +130,45 @@ const CalendarView = () => {
     
     setShowDatePicker(false);
     setIsModalOpen(true);
+  };
+
+  const handleBookingClick = (e, booking) => {
+    e.stopPropagation();
+    setSelectedBooking(booking);
+    
+    setFormData({
+      roomId: booking.roomId?._id || booking.roomId, 
+      customerName: booking.customerName, 
+      mobileNumber: booking.mobileNumber, 
+      numberOfGuests: booking.numberOfGuests,
+      checkInDate: new Date(booking.checkInDate).toISOString().split('T')[0], 
+      checkOutDate: new Date(booking.checkOutDate).toISOString().split('T')[0], 
+      source: booking.source, 
+      amount: booking.amount, 
+      notes: booking.notes || ''
+    });
+
+    setDateRange([{
+      startDate: new Date(booking.checkInDate),
+      endDate: new Date(booking.checkOutDate),
+      key: 'selection'
+    }]);
+
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteBooking = async () => {
+    if (!selectedBooking) return;
+    if (!window.confirm('Are you sure you want to remove this booking?')) return;
+
+    try {
+      await apiFetch(`/bookings/${selectedBooking._id}`, 'DELETE');
+      alert('Booking removed successfully');
+      setIsModalOpen(false);
+      loadInitialData();
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -198,7 +239,12 @@ const CalendarView = () => {
                 <div className="cell-date">{d.getDate()}</div>
                 <div className="bookings-indicators">
                   {dateBookings.slice(0, 3).map((b, i) => (
-                    <div key={i} className="booking-chip" title={`${b.customerName} - Room ${b.roomId?.roomNumber}`}>
+                    <div 
+                      key={i} 
+                      className="booking-chip" 
+                      title={`${b.customerName} - Room ${b.roomId?.roomNumber}`}
+                      onClick={(e) => handleBookingClick(e, b)}
+                    >
                       {b.roomId?.roomNumber} {b.customerName.split(' ')[0]}
                     </div>
                   ))}
@@ -214,8 +260,15 @@ const CalendarView = () => {
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>New Booking</h3>
-              <button className="icon-btn" onClick={() => setIsModalOpen(false)}><X size={20}/></button>
+              <h3>{selectedBooking ? 'View Booking' : 'New Booking'}</h3>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {selectedBooking && (
+                  <button className="icon-btn text-danger" onClick={handleDeleteBooking} title="Delete Booking">
+                    <Trash2 size={20}/>
+                  </button>
+                )}
+                <button className="icon-btn" onClick={() => setIsModalOpen(false)}><X size={20}/></button>
+              </div>
             </div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body form-grid">
@@ -325,7 +378,7 @@ const CalendarView = () => {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={() => setIsModalOpen(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary">Save Booking</button>
+                {!selectedBooking && <button type="submit" className="btn btn-primary">Save Booking</button>}
               </div>
             </form>
           </div>
