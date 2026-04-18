@@ -26,25 +26,17 @@ app.get('/api/status', (req, res) => {
   res.json({ status: 'API is running smoothly!' });
 });
 
-// Serve React frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const distPath = path.resolve(__dirname, '../dist');
-  app.use(express.static(distPath));
-  // Catch-all: send React app for any non-API route
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-  });
-}
-
 // Database Connection
 const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/staycalender';
 mongoose.connect(uri)
   .then(() => console.log('MongoDB successfully connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Always listen on PORT
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT} [${process.env.NODE_ENV || 'development'}]`);
-});
+// Only listen locally — Vercel handles this in production as a serverless function
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
