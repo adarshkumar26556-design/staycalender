@@ -20,7 +20,9 @@ const AdminPanel = () => {
   const [roomCategory, setRoomCategory] = useState('Standard');
   const [roomProperty, setRoomProperty] = useState('');
 
-
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     setLoading(true);
@@ -35,10 +37,6 @@ const AdminPanel = () => {
     }
     setLoading(false);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handleCreateProperty = async (e) => {
     e.preventDefault();

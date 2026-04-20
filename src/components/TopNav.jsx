@@ -1,6 +1,10 @@
-import { Menu, Bell, Sun, Moon, User as UserIcon } from 'lucide-react';
+import { useContext, useEffect, useState } from 'react';
+import { Menu, Bell, User as UserIcon } from 'lucide-react';
+import { AuthContext } from '../context/AuthContext';
+import { apiFetch } from '../utils/api';
 
-const TopNav = ({ sidebarOpen, setSidebarOpen, isDarkMode, setIsDarkMode }) => {
+const TopNav = ({ sidebarOpen, setSidebarOpen }) => {
+  const { user } = useContext(AuthContext);
 
   return (
     <header className="topnav glass-panel">
@@ -14,9 +18,6 @@ const TopNav = ({ sidebarOpen, setSidebarOpen, isDarkMode, setIsDarkMode }) => {
 
       </div>
       <div className="topnav-right">
-        <button className="action-btn" onClick={() => setIsDarkMode(!isDarkMode)}>
-          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-        </button>
         <button className="action-btn">
           <Bell size={20} />
         </button>
