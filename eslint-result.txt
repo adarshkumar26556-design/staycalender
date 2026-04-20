@@ -1,0 +1,205 @@
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\index.js[24m[0m
+[0m   [2m1:14[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m2:1[22m   [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m2:47[22m  [31merror[39m  '__dirname' is not defined  [2mno-undef[22m[0m
+[0m   [2m3:17[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m4:18[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m5:14[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m7:20[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m8:24[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m9:20[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m  [2m10:23[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m  [2m13:14[22m  [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m  [2m30:13[22m  [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m  [2m36:5[22m   [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m  [2m42:1[22m   [31merror[39m  'module' is not defined     [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\middleware\auth.js[24m[0m
+[0m   [2m1:13[22m  [31merror[39m  'require' is not defined         [2mno-undef[22m[0m
+[0m   [2m8:62[22m  [31merror[39m  'process' is not defined         [2mno-undef[22m[0m
+[0m  [2m11:12[22m  [31merror[39m  'err' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m23:1[22m   [31merror[39m  'module' is not defined          [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\models\Booking.js[24m[0m
+[0m   [2m1:18[22m  [31merror[39m  'require' is not defined  [2mno-undef[22m[0m
+[0m  [2m17:1[22m   [31merror[39m  'module' is not defined   [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\models\Property.js[24m[0m
+[0m  [2m1:18[22m  [31merror[39m  'require' is not defined  [2mno-undef[22m[0m
+[0m  [2m9:1[22m   [31merror[39m  'module' is not defined   [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\models\Room.js[24m[0m
+[0m   [2m1:18[22m  [31merror[39m  'require' is not defined  [2mno-undef[22m[0m
+[0m  [2m13:1[22m   [31merror[39m  'module' is not defined   [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\models\User.js[24m[0m
+[0m   [2m1:18[22m  [31merror[39m  'require' is not defined  [2mno-undef[22m[0m
+[0m  [2m11:1[22m   [31merror[39m  'module' is not defined   [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\routes\authRoutes.js[24m[0m
+[0m   [2m1:17[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m2:16[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m3:13[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m4:14[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m5:45[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m  [2m19:37[22m  [31merror[39m  'process' is not defined           [2mno-undef[22m[0m
+[0m  [2m42:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m52:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m62:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m67:1[22m   [31merror[39m  'module' is not defined            [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\routes\bookingRoutes.js[24m[0m
+[0m    [2m1:17[22m  [31merror[39m  'require' is not defined                                                                  [2mno-undef[22m[0m
+[0m    [2m2:7[22m   [31merror[39m  'mongoose' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  [2mno-unused-vars[22m[0m
+[0m    [2m2:18[22m  [31merror[39m  'require' is not defined                                                                  [2mno-undef[22m[0m
+[0m    [2m3:17[22m  [31merror[39m  'require' is not defined                                                                  [2mno-undef[22m[0m
+[0m    [2m4:14[22m  [31merror[39m  'require' is not defined                                                                  [2mno-undef[22m[0m
+[0m    [2m5:28[22m  [31merror[39m  'require' is not defined                                                                  [2mno-undef[22m[0m
+[0m   [2m26:12[22m  [31merror[39m  'error' is defined but never used                                                         [2mno-unused-vars[22m[0m
+[0m  [2m119:12[22m  [31merror[39m  'error' is defined but never used                                                         [2mno-unused-vars[22m[0m
+[0m  [2m137:12[22m  [31merror[39m  'error' is defined but never used                                                         [2mno-unused-vars[22m[0m
+[0m  [2m169:12[22m  [31merror[39m  'error' is defined but never used                                                         [2mno-unused-vars[22m[0m
+[0m  [2m174:1[22m   [31merror[39m  'module' is not defined                                                                   [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\routes\propertyRoutes.js[24m[0m
+[0m   [2m1:17[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m2:18[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m3:14[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m4:16[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m5:45[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m  [2m19:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m54:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m68:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m73:1[22m   [31merror[39m  'module' is not defined            [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\routes\roomRoutes.js[24m[0m
+[0m   [2m1:17[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m2:14[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m   [2m3:45[22m  [31merror[39m  'require' is not defined           [2mno-undef[22m[0m
+[0m  [2m11:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m25:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m40:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m51:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m61:12[22m  [31merror[39m  'error' is defined but never used  [2mno-unused-vars[22m[0m
+[0m  [2m66:1[22m   [31merror[39m  'module' is not defined            [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\api\seed.js[24m[0m
+[0m   [2m1:14[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m2:1[22m   [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m2:47[22m  [31merror[39m  '__dirname' is not defined  [2mno-undef[22m[0m
+[0m   [2m3:18[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m4:16[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m5:14[22m  [31merror[39m  'require' is not defined    [2mno-undef[22m[0m
+[0m   [2m9:17[22m  [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m  [2m16:7[22m   [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m  [2m34:5[22m   [31merror[39m  'process' is not defined    [2mno-undef[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\components\Layout.jsx[24m[0m
+[0m  [2m10:11[22m  [31merror[39m  'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\components\TopNav.jsx[24m[0m
+[0m  [2m1:22[22m  [31merror[39m  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u      [2mno-unused-vars[22m[0m
+[0m  [2m1:33[22m  [31merror[39m  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u       [2mno-unused-vars[22m[0m
+[0m  [2m4:10[22m  [31merror[39m  'apiFetch' is defined but never used. Allowed unused vars must match /^[A-Z_]/u       [2mno-unused-vars[22m[0m
+[0m  [2m7:11[22m  [31merror[39m  'user' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\context\AuthContext.jsx[24m[0m
+[0m   [2m4:14[22m  [31merror[39m  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         [2mreact-refresh/only-export-components[22m[0m
+[0m  [2m16:7[22m   [31merror[39m  Error: Calling setState synchronously within an effect can trigger cascading renders[0m
+[0m[0m
+[0mEffects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:[0m
+[0m* Update external systems with the latest state from React.[0m
+[0m* Subscribe for updates from some external system, calling setState in a callback function when external state changes.[0m
+[0m[0m
+[0mCalling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).[0m
+[0m[0m
+[0m  14 |[0m
+[0m  15 |     if (token && storedUser) {[0m
+[0m> 16 |       setUser(JSON.parse(storedUser));[0m
+[0m     |       ^^^^^^^ Avoid calling setState() directly within an effect[0m
+[0m  17 |     }[0m
+[0m  18 |     setLoading(false);[0m
+[0m  19 |   }, []);  [2mreact-hooks/set-state-in-effect[22m[0m
+[0m  [2m39:14[22m  [31merror[39m  'error' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\AdminPanel.jsx[24m[0m
+[0m   [2m9:10[22m  [31merror[39m  'users' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     [2mno-unused-vars[22m[0m
+[0m   [2m9:17[22m  [31merror[39m  'setUsers' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  [2mno-unused-vars[22m[0m
+[0m  [2m24:5[22m   [31merror[39m  Error: Cannot access variable before it is declared[0m
+[0m[0m
+[0m`fetchData` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.[0m
+[0m[0m
+[0m  22 |[0m
+[0m  23 |   useEffect(() => {[0m
+[0m> 24 |     fetchData();[0m
+[0m     |     ^^^^^^^^^ `fetchData` accessed before it is declared[0m
+[0m  25 |   }, []);[0m
+[0m  26 |[0m
+[0m  27 |   const fetchData = async () => {[0m
+[0m[0m
+[0m  25 |   }, []);[0m
+[0m  26 |[0m
+[0m> 27 |   const fetchData = async () => {[0m
+[0m     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 28 |     setLoading(true);[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 29 |     try {[0m
+[0m     …[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 38 |     setLoading(false);[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 39 |   };[0m
+[0m     | ^^^^^ `fetchData` is declared here[0m
+[0m  40 |[0m
+[0m  41 |   const handleCreateProperty = async (e) => {[0m
+[0m  42 |     e.preventDefault();  [2mreact-hooks/immutability[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\Bookings.jsx[24m[0m
+[0m  [2m28:5[22m  [31merror[39m    Error: Cannot access variable before it is declared[0m
+[0m[0m
+[0m`fetchBookings` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.[0m
+[0m[0m
+[0m  26 |[0m
+[0m  27 |   useEffect(() => {[0m
+[0m> 28 |     fetchBookings();[0m
+[0m     |     ^^^^^^^^^^^^^ `fetchBookings` accessed before it is declared[0m
+[0m  29 |   }, [user]);[0m
+[0m  30 |[0m
+[0m  31 |   const fetchBookings = async () => {[0m
+[0m[0m
+[0m  29 |   }, [user]);[0m
+[0m  30 |[0m
+[0m> 31 |   const fetchBookings = async () => {[0m
+[0m     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 32 |     if (!user?.propertyId && user?.role !== 'Admin') return;[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 33 |     setLoading(true);[0m
+[0m     …[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 41 |     setLoading(false);[0m
+[0m     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[0m> 42 |   };[0m
+[0m     | ^^^^^ `fetchBookings` is declared here[0m
+[0m  43 |[0m
+[0m  44 |   const handleDelete = async (id) => {[0m
+[0m  45 |     if (!window.confirm('Are you sure you want to delete this booking?')) return;  [2mreact-hooks/immutability[22m[0m
+[0m  [2m29:6[22m  [33mwarning[39m  React Hook useEffect has a missing dependency: 'fetchBookings'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             [2mreact-hooks/exhaustive-deps[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\CalendarView.jsx[24m[0m
+[0m  [2m17:10[22m  [31merror[39m    'selectedDate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                        [2mno-unused-vars[22m[0m
+[0m  [2m21:10[22m  [31merror[39m    'loading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                             [2mno-unused-vars[22m[0m
+[0m  [2m58:6[22m   [33mwarning[39m  React Hook useEffect has a missing dependency: 'loadInitialData'. Either include it or remove the dependency array  [2mreact-hooks/exhaustive-deps[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\Login.jsx[24m[0m
+[0m  [2m13:9[22m  [31merror[39m  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  [2mno-unused-vars[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\Revenue.jsx[24m[0m
+[0m  [2m19:10[22m  [31merror[39m    'loading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                          [2mno-unused-vars[22m[0m
+[0m  [2m25:6[22m   [33mwarning[39m  React Hook useEffect has a missing dependency: 'fetchRevenue'. Either include it or remove the dependency array  [2mreact-hooks/exhaustive-deps[22m[0m
+[0m[0m
+[0m[4mC:\Users\adars\OneDrive\Desktop\staycalender\src\pages\RoomStatus.jsx[24m[0m
+[0m  [2m19:6[22m  [33mwarning[39m  React Hook useEffect has a missing dependency: 'fetchStatus'. Either include it or remove the dependency array  [2mreact-hooks/exhaustive-deps[22m[0m
+[0m[0m
+[0m[31m[1m✖ 94 problems (90 errors, 4 warnings)[22m[39m[0m
+[0m[31m[1m[22m[39m[0m

@@ -1,10 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { Menu, Bell, User as UserIcon, Sun, Moon } from 'lucide-react';
-import { AuthContext } from '../context/AuthContext';
-import { apiFetch } from '../utils/api';
+import { Menu, Bell, Sun, Moon, User as UserIcon } from 'lucide-react';
 
 const TopNav = ({ sidebarOpen, setSidebarOpen, isDarkMode, setIsDarkMode }) => {
-  const { user } = useContext(AuthContext);
 
   return (
     <header className="topnav glass-panel">

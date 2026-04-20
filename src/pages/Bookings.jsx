@@ -24,9 +24,7 @@ const Bookings = () => {
     notes: ''
   });
 
-  useEffect(() => {
-    fetchBookings();
-  }, [user]);
+
 
   const fetchBookings = async () => {
     if (!user?.propertyId && user?.role !== 'Admin') return;
@@ -40,6 +38,10 @@ const Bookings = () => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchBookings();
+  }, [user]);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this booking?')) return;
