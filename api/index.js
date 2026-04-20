@@ -26,17 +26,26 @@ app.get('/api/status', (req, res) => {
   res.json({ status: 'API is running smoothly!' });
 });
 
+// 404 Handler
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled Error:', err);
+  res.status(500).json({ message: 'Internal Server Error', error: err.message });
+});
+
 // Database Connection
 const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/staycalender';
 mongoose.connect(uri)
   .then(() => console.log('MongoDB successfully connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Only listen locally — Vercel handles this in production as a serverless function
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-}
+// Always listen locally for debugging
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 module.exports = app;

@@ -16,8 +16,14 @@ export const apiFetch = async (endpoint, method = 'GET', body = null) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, options);
   
   if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'API request failed');
+    let errorMessage = 'API request failed';
+    try {
+      const errorData = await response.json();
+      errorMessage = errorData.message || errorMessage;
+    } catch (e) {
+      errorMessage = `Error ${response.status}: ${response.statusText}`;
+    }
+    throw new Error(errorMessage);
   }
 
   return response.json();

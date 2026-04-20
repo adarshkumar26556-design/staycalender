@@ -9,6 +9,7 @@ router.get('/', authMiddleware, adminMiddleware, async (req, res) => {
     const rooms = await Room.find().populate('propertyId', 'name').sort({ propertyId: 1, roomNumber: 1 });
     res.json(rooms);
   } catch (error) {
+    console.error('Get All Rooms error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -23,6 +24,7 @@ router.get('/:propertyId', authMiddleware, async (req, res) => {
     const rooms = await Room.find({ propertyId: req.params.propertyId }).sort({ roomNumber: 1 });
     res.json(rooms);
   } catch (error) {
+    console.error('Get Property Rooms error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -38,6 +40,7 @@ router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
     await room.save();
     res.status(201).json(room);
   } catch (error) {
+    console.error('Create Room error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -49,6 +52,7 @@ router.patch('/:id/status', authMiddleware, adminMiddleware, async (req, res) =>
     const room = await Room.findByIdAndUpdate(req.params.id, { status }, { new: true });
     res.json(room);
   } catch (error) {
+    console.error('Update Room Status error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -59,6 +63,7 @@ router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     await Room.findByIdAndDelete(req.params.id);
     res.json({ message: 'Room deleted successfully' });
   } catch (error) {
+    console.error('Delete Room error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

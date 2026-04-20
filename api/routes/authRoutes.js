@@ -7,8 +7,10 @@ const router = express.Router();
 
 // Login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body || {};
+    if (!email || !password) return res.status(400).json({ message: 'Email and password are required' });
+    
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: 'Invalid credentials' });
 
@@ -40,6 +42,7 @@ router.post('/users', authMiddleware, adminMiddleware, async (req, res) => {
     
     res.status(201).json({ message: 'User created successfully', user: { id: user._id, email } });
   } catch (error) {
+    console.error('Create User error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -50,6 +53,7 @@ router.get('/me', authMiddleware, async (req, res) => {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
   } catch (error) {
+    console.error('Get Me error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -60,6 +64,7 @@ router.get('/users', authMiddleware, adminMiddleware, async (req, res) => {
     const users = await User.find().select('-password').populate('propertyId');
     res.json(users);
   } catch (error) {
+    console.error('Get Users error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

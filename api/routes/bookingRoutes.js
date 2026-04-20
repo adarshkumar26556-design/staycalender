@@ -24,6 +24,7 @@ router.get('/:propertyId', authMiddleware, async (req, res) => {
     const bookings = await Booking.find(query).populate('roomId', 'roomNumber category status').sort({ checkInDate: 1 });
     res.json(bookings);
   } catch (error) {
+    console.error('Get Bookings error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -117,6 +118,7 @@ router.get('/:propertyId/revenue', authMiddleware, async (req, res) => {
       sourceRevenue
     });
   } catch (error) {
+    console.error('Revenue error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -135,6 +137,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     await Booking.findByIdAndDelete(req.params.id);
     res.json({ message: 'Booking deleted successfully' });
   } catch (error) {
+    console.error('Delete Booking error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -167,6 +170,7 @@ router.patch('/:id', authMiddleware, async (req, res) => {
     const updatedBooking = await Booking.findByIdAndUpdate(req.params.id, updatedData, { new: true });
     res.json(updatedBooking);
   } catch (error) {
+    console.error('Update Booking error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
