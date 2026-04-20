@@ -21,7 +21,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <div className="sidebar-header">
         <div className="logo">
           <Building2 color="var(--accent-primary)" />
-          {isOpen && <span>StayCalendar</span>}
+          {isOpen && <span>StaySync</span>}
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}

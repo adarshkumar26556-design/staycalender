@@ -31,7 +31,7 @@ const Login = () => {
           <div className="logo-container">
             <Building2 size={36} color="var(--accent-primary)" />
           </div>
-          <h1>StayCalendar</h1>
+          <h1>StaySync</h1>
           <p>Login to manage your properties</p>
         </div>
 
@@ -47,7 +47,7 @@ const Login = () => {
                 value={email} 
                 onChange={(e) => setEmail(e.target.value)} 
                 required 
-                placeholder="admin@staycalendar.com"
+                placeholder="admin@staysync.com"
               />
             </div>
           </div>
