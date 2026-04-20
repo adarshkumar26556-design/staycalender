@@ -16,6 +16,25 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Database Connection Middleware for Vercel Serverless
+let isConnected = false;
+
+app.use(async (req, res, next) => {
+  if (isConnected) {
+    return next();
+  }
+  try {
+    const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/staycalender';
+    const db = await mongoose.connect(uri);
+    isConnected = db.connections[0].readyState === 1;
+    console.log('MongoDB successfully connected in Serverless Context');
+    next();
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+    res.status(500).json({ message: 'Database Connection Error', details: err.message });
+  }
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
@@ -25,12 +44,6 @@ app.use('/api/bookings', bookingRoutes);
 app.get('/api/status', (req, res) => {
   res.json({ status: 'API is running smoothly!' });
 });
-
-// Database Connection
-const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/staycalender';
-mongoose.connect(uri)
-  .then(() => console.log('MongoDB successfully connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
 
 // Only listen locally — Vercel handles this in production as a serverless function
 if (process.env.NODE_ENV !== 'production') {

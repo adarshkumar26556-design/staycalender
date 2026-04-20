@@ -17,7 +17,7 @@ router.get('/', authMiddleware, async (req, res) => {
       res.json(properties);
     }
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
@@ -52,7 +52,7 @@ router.post('/', authMiddleware, adminMiddleware, async (req, res) => {
 
     res.status(201).json(property);
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
@@ -66,7 +66,7 @@ router.delete('/:id', authMiddleware, adminMiddleware, async (req, res) => {
     
     res.json({ message: 'Property and associated owner accounts deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
