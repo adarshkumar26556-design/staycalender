@@ -92,14 +92,14 @@ const Bookings = () => {
           <h2>All Bookings</h2>
           <p className="text-secondary">View and manage your guest reservations</p>
         </div>
-        <div className="search-bar glass-panel" style={{ display: 'flex', alignItems: 'center', padding: '0 1rem', height: '42px' }}>
-          <Search size={18} className="text-muted" style={{ marginRight: '0.5rem' }} />
+        <div className="search-bar glass-panel" style={{ display: 'flex', alignItems: 'center', padding: '0 1rem', height: '42px', width: '100%', maxWidth: '350px' }}>
+          <Search size={18} className="text-muted" style={{ marginRight: '0.5rem', flexShrink: 0 }} />
           <input 
             type="text" 
             placeholder="Search by name or mobile..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ border: 'none', background: 'transparent', outline: 'none', width: '250px' }}
+            style={{ border: 'none', background: 'transparent', outline: 'none', width: '100%' }}
           />
         </div>
       </div>

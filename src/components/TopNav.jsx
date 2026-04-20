@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Menu, Bell, User as UserIcon } from 'lucide-react';
+import { Menu, Bell, User as UserIcon, Sun, Moon } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 import { apiFetch } from '../utils/api';
 
-const TopNav = ({ sidebarOpen, setSidebarOpen }) => {
+const TopNav = ({ sidebarOpen, setSidebarOpen, isDarkMode, setIsDarkMode }) => {
   const { user } = useContext(AuthContext);
 
   return (
@@ -18,6 +18,9 @@ const TopNav = ({ sidebarOpen, setSidebarOpen }) => {
 
       </div>
       <div className="topnav-right">
+        <button className="action-btn" onClick={() => setIsDarkMode(!isDarkMode)}>
+          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
         <button className="action-btn">
           <Bell size={20} />
         </button>

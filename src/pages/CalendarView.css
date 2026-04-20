@@ -2,6 +2,8 @@
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .calendar-header {
@@ -37,6 +39,7 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   overflow: hidden;
+  min-width: 600px;
 }
 
 .calendar-day-header {
