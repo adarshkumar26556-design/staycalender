@@ -50,12 +50,13 @@ app.use((err, req, res, next) => {
 
 // Database Connection
 const uri = process.env.MONGO_URI;
-if (!uri) {
-  console.error('CRITICAL: MONGO_URI is not defined in environment variables!');
+if (uri) {
+  mongoose.connect(uri)
+    .then(() => console.log('MongoDB successfully connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
+} else {
+  console.error('CRITICAL: MONGO_URI is not defined!');
 }
-mongoose.connect(uri || 'mongodb://localhost:27017/staycalender')
-  .then(() => console.log('MongoDB successfully connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
 
 // Always listen locally for debugging, but prevent hanging on Vercel
 if (!process.env.VERCEL) {
