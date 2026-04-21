@@ -1,0 +1,76 @@
+const express = require('express');
+const Property = require('../models/Property');
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
+const { authMiddleware, adminMiddleware } = require('../middleware/auth');
+const router = express.Router();
+
+// Get all properties (Admin gets all, Owner gets their own)
+router.get('/', authMiddleware, async (req, res, next) => {
+  try {
+    if (req.user.role === 'Admin') {
+      const properties = await Property.find().populate('ownerId', 'name email');
+      res.json(properties);
+    } else {
+      if (!req.user.propertyId) return res.json([]);
+      const properties = await Property.find({ _id: req.user.propertyId });
+      res.json(properties);
+    }
+  } catch (error) {
+    console.error('Get Properties error:', error);
+    next(error);
+  }
+});
+
+// Admin: Create Property
+router.post('/', authMiddleware, adminMiddleware, async (req, res, next) => {
+  try {
+    const { name, address, email, password } = req.body;
+    
+    if (email) {
+      const existing = await User.findOne({ email });
+      if (existing) return res.status(400).json({ message: 'Email already exists for another user.' });
+    }
+
+    const property = new Property({ name, address });
+    await property.save();
+
+    if (email && password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const user = new User({
+        name: name,
+        email,
+        password: hashedPassword,
+        role: 'Owner',
+        propertyId: property._id
+      });
+      await user.save();
+      
+      property.ownerId = user._id;
+      await property.save();
+    }
+
+    res.status(201).json(property);
+  } catch (error) {
+    console.error('Create Property error:', error);
+    next(error);
+  }
+});
+
+// Admin: Delete Property
+router.delete('/:id', authMiddleware, adminMiddleware, async (req, res, next) => {
+  try {
+    // Delete property
+    await Property.findByIdAndDelete(req.params.id);
+    // Also delete associated owners for this property (optional cleanup)
+    await User.deleteMany({ propertyId: req.params.id, role: 'Owner' });
+    
+    res.json({ message: 'Property and associated owner accounts deleted successfully' });
+  } catch (error) {
+    console.error('Delete Property error:', error);
+    next(error);
+  }
+});
+
+module.exports = router;
