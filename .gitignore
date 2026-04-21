@@ -1,6 +1,4 @@
-# Old folders (now moved to root and api/)
-backend/
-frontend/
+# Old ignores removed - we need these folders in production
 .env
 api/.env
 
