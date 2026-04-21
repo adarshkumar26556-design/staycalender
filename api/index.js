@@ -4,10 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const authRoutes = require('./routes/authRoutes');
-const propertyRoutes = require('./routes/propertyRoutes');
-const roomRoutes = require('./routes/roomRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
+const authRoutes = require('../backend/routes/authRoutes');
+const propertyRoutes = require('../backend/routes/propertyRoutes');
+const roomRoutes = require('../backend/routes/roomRoutes');
+const bookingRoutes = require('../backend/routes/bookingRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -43,9 +43,11 @@ mongoose.connect(uri)
   .then(() => console.log('MongoDB successfully connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Always listen locally for debugging
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Always listen locally for debugging, but prevent hanging on Vercel
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
