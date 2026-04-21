@@ -23,7 +23,13 @@ app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);
 
 app.get('/api/status', (req, res) => {
-  res.json({ status: 'API is running smoothly!' });
+  const dbState = mongoose.connection.readyState;
+  const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+  res.json({ 
+    status: 'API is running', 
+    database: states[dbState] || 'unknown',
+    uri_present: !!process.env.MONGO_URI 
+  });
 });
 
 // 404 Handler
