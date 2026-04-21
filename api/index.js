@@ -38,13 +38,16 @@ app.use((err, req, res, next) => {
   res.status(500).json({ 
     message: 'Internal Server Error', 
     error: err.message,
-    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    stack: err.stack
   });
 });
 
 // Database Connection
-const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/staycalender';
-mongoose.connect(uri)
+const uri = process.env.MONGO_URI;
+if (!uri) {
+  console.error('CRITICAL: MONGO_URI is not defined in environment variables!');
+}
+mongoose.connect(uri || 'mongodb://localhost:27017/staycalender')
   .then(() => console.log('MongoDB successfully connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
