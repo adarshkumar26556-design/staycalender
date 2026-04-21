@@ -33,8 +33,13 @@ app.use((req, res) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('Unhandled Error:', err);
-  res.status(500).json({ message: 'Internal Server Error', error: err.message });
+  console.error('!!! GLOBAL ERROR !!!');
+  console.error(err);
+  res.status(500).json({ 
+    message: 'Internal Server Error', 
+    error: err.message,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
 });
 
 // Database Connection
