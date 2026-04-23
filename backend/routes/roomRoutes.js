@@ -17,8 +17,8 @@ router.get('/', authMiddleware, adminMiddleware, async (req, res, next) => {
 // Get rooms for a property
 router.get('/:propertyId', authMiddleware, async (req, res, next) => {
   try {
-    // Check access
-    if (req.user.role !== 'Admin' && req.user.propertyId !== req.params.propertyId) {
+    // Check access — compare as strings since req.user.propertyId may be an ObjectId
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== req.params.propertyId) {
       return res.status(403).json({ message: 'Access denied' });
     }
     const rooms = await Room.find({ propertyId: req.params.propertyId }).sort({ roomNumber: 1 });

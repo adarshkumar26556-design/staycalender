@@ -8,7 +8,7 @@ const router = express.Router();
 // Get bookings for a property (with filters e.g., by date)
 router.get('/:propertyId', authMiddleware, async (req, res, next) => {
   try {
-    if (req.user.role !== 'Admin' && req.user.propertyId !== req.params.propertyId) {
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== req.params.propertyId) {
       return res.status(403).json({ message: 'Access denied' });
     }
     
@@ -34,7 +34,7 @@ router.post('/', authMiddleware, async (req, res, next) => {
   try {
     const { propertyId, roomId, customerName, mobileNumber, numberOfGuests, checkInDate, checkOutDate, source, amount, notes } = req.body;
     
-    if (req.user.role !== 'Admin' && req.user.propertyId !== propertyId) {
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== propertyId) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
@@ -79,7 +79,7 @@ router.post('/', authMiddleware, async (req, res, next) => {
 // Revenue Endpoint
 router.get('/:propertyId/revenue', authMiddleware, async (req, res, next) => {
   try {
-    if (req.user.role !== 'Admin' && req.user.propertyId !== req.params.propertyId) {
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== req.params.propertyId) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
@@ -130,7 +130,7 @@ router.delete('/:id', authMiddleware, async (req, res, next) => {
     if (!booking) return res.status(404).json({ message: 'Booking not found' });
 
     // Check access
-    if (req.user.role !== 'Admin' && req.user.propertyId !== booking.propertyId.toString()) {
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== booking.propertyId.toString()) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
@@ -151,7 +151,7 @@ router.patch('/:id', authMiddleware, async (req, res, next) => {
     if (!booking) return res.status(404).json({ message: 'Booking not found' });
 
     // Check access
-    if (req.user.role !== 'Admin' && req.user.propertyId !== booking.propertyId.toString()) {
+    if (req.user.role !== 'Admin' && req.user.propertyId?.toString() !== booking.propertyId.toString()) {
       return res.status(403).json({ message: 'Access denied' });
     }
 
