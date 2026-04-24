@@ -16,6 +16,21 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// DB readiness guard — returns a 503 if MongoDB is not yet connected
+app.use('/api', (req, res, next) => {
+  const dbState = mongoose.connection.readyState;
+  // 0 = disconnected, 2 = connecting, 3 = disconnecting; 1 = connected
+  if (dbState !== 1 && req.path !== '/status') {
+    console.error(`[DB Guard] MongoDB not ready (state: ${dbState}). MONGO_URI present: ${!!process.env.MONGO_URI}`);
+    return res.status(503).json({
+      message: 'Database not connected. Please try again shortly.',
+      dbState,
+      mongo_uri_present: !!process.env.MONGO_URI
+    });
+  }
+  next();
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
