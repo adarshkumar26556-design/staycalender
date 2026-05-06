@@ -40,21 +40,23 @@
 }
 
 .calendar-day-header {
-  background: var(--bg-secondary);
-  padding: 1rem;
-  text-align: center;
+  background: var(--bg-tertiary);
+  padding: 0.75rem;
+  text-align: left;
   font-weight: 600;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .calendar-cell {
-  background: var(--bg-primary);
-  min-height: 120px;
+  background: var(--bg-secondary);
+  min-height: 110px;
   padding: 0.5rem;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
 }
 
 .calendar-cell:hover {
@@ -62,7 +64,7 @@
 }
 
 .calendar-cell.other-month {
-  background: rgba(15, 17, 21, 0.5); /* darkened primary bg */
+  background: var(--bg-primary);
   color: var(--text-muted);
 }
 
@@ -70,11 +72,8 @@
   font-weight: 500;
   margin-bottom: 0.5rem;
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  line-height: 24px;
-  border-radius: 50%;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .bookings-indicators {

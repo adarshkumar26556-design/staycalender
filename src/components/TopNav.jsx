@@ -20,7 +20,7 @@ const TopNav = ({ sidebarOpen, setSidebarOpen }) => {
   }, [isDark]);
 
   return (
-    <header className="topnav glass-panel">
+    <header className="topnav">
       <div className="topnav-left" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         {!sidebarOpen && (
           <button className="menu-btn" onClick={() => setSidebarOpen(true)}>

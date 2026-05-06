@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   ];
 
   return (
-    <aside className={`sidebar glass-panel ${isOpen ? 'open' : 'closed'}`}>
+    <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="sidebar-header">
         <div className="logo">
           <Building2 color="var(--accent-primary)" />
