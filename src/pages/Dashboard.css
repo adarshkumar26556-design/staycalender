@@ -529,8 +529,15 @@
   .dashboard-grid { grid-template-columns: 1fr; }
   .dash-card-wide { grid-column: 1; }
   .kpi-value { font-size: 1.2rem; }
-  .property-overview { grid-template-columns: repeat(3, auto); gap: 1rem; }
+  .property-overview { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   .occupancy-visual { grid-column: 1 / -1; padding: 0; }
   .mini-table { font-size: 0.8rem; }
-  .upcoming-table { overflow-x: auto; }
+  .upcoming-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .mini-table th, .mini-table td { white-space: nowrap; }
+}
+
+@media (max-width: 480px) {
+  .kpi-grid { grid-template-columns: 1fr; }
+  .property-overview { grid-template-columns: 1fr 1fr; }
+  .dash-card { padding: 1rem; }
 }

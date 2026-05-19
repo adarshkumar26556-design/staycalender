@@ -391,3 +391,25 @@
   gap: 0.75rem;
   font-size: 0.95rem;
 }
+
+/* ─── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cm-container { padding: 1rem; }
+  .cm-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .cm-header-actions { width: 100%; justify-content: space-between; }
+  .cm-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  .cm-stats { grid-template-columns: 1fr 1fr; }
+  .cm-ota-grid { grid-template-columns: 1fr 1fr; }
+  .cm-panel-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  
+  /* Tables horizontally scrollable */
+  .cm-panel-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cm-table th, .cm-table td { white-space: nowrap; }
+}
+
+@media (max-width: 480px) {
+  .cm-stats { grid-template-columns: 1fr; }
+  .cm-ota-grid { grid-template-columns: 1fr; }
+  .cm-api-row { flex-direction: column; align-items: stretch; }
+  .cm-header-actions { flex-direction: column; align-items: stretch; }
+}
