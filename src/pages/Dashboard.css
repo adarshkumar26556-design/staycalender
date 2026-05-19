@@ -473,7 +473,6 @@
 .stat-num {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(var(--color), var(--text-primary));
   line-height: 1;
   color: var(--color, var(--text-primary));
 }
