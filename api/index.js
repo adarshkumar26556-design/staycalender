@@ -20,19 +20,36 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// DB readiness guard — returns a 503 if MongoDB is not yet connected
-app.use('/api', (req, res, next) => {
-  const dbState = mongoose.connection.readyState;
-  // 0 = disconnected, 2 = connecting, 3 = disconnecting; 1 = connected
-  if (dbState !== 1 && req.path !== '/status') {
-    console.error(`[DB Guard] MongoDB not ready (state: ${dbState}). MONGO_URI present: ${!!process.env.MONGO_URI}`);
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  if (mongoose.connection.readyState === 1) {
+    isConnected = true;
+    return;
+  }
+  const uri = process.env.MONGO_URI;
+  if (!uri) {
+    console.error('CRITICAL: MONGO_URI is not defined!');
+    throw new Error('MONGO_URI is not defined');
+  }
+  await mongoose.connect(uri);
+  isConnected = true;
+  console.log('MongoDB successfully connected (Serverless)');
+};
+
+// DB readiness guard
+app.use('/api', async (req, res, next) => {
+  if (req.path === '/status') return next();
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error(`[DB Guard] MongoDB connection failed:`, err);
     return res.status(503).json({
       message: 'Database not connected. Please try again shortly.',
-      dbState,
-      mongo_uri_present: !!process.env.MONGO_URI
+      error: err.message
     });
   }
-  next();
 });
 
 // Routes
@@ -68,15 +85,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Database Connection
-const uri = process.env.MONGO_URI;
-if (uri) {
-  mongoose.connect(uri)
-    .then(() => console.log('MongoDB successfully connected'))
-    .catch(err => console.error('MongoDB connection error:', err));
-} else {
-  console.error('CRITICAL: MONGO_URI is not defined!');
-}
+// Database connection is now handled inside the request middleware for Serverless compatibility.
 
 // Always listen locally for debugging, but prevent hanging on Vercel
 if (!process.env.VERCEL) {
