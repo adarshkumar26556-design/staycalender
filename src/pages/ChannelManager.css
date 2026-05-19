@@ -1,0 +1,393 @@
+/* ─── Channel Manager Enterprise CSS ─────────────────────────────────────────── */
+
+.cm-container {
+  padding: 1.5rem 2rem;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--bg-primary);
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────────── */
+.cm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.cm-header-left h1 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.cm-header-left p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.cm-header-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* ─── Property Selector ───────────────────────────────────────────────────────── */
+.cm-property-select {
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  min-width: 200px;
+}
+
+/* ─── Tab Bar ─────────────────────────────────────────────────────────────────── */
+.cm-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.cm-tab {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+
+.cm-tab:hover { color: var(--text-primary); }
+.cm-tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+
+/* ─── Stats Row ───────────────────────────────────────────────────────────────── */
+.cm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cm-stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cm-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.cm-stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.cm-stat-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ─── OTA Cards ───────────────────────────────────────────────────────────────── */
+.cm-ota-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cm-ota-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.cm-ota-card:hover { box-shadow: var(--shadow-md); }
+
+.cm-ota-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--ota-color, var(--accent-primary));
+}
+
+.cm-ota-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.cm-ota-logo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cm-ota-logo span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.1rem;
+}
+
+.cm-badge {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.cm-badge.connected { background: rgba(16,185,129,0.12); color: #10B981; }
+.cm-badge.disconnected { background: rgba(107,114,128,0.12); color: #6B7280; }
+.cm-badge.error { background: rgba(239,68,68,0.12); color: #EF4444; }
+
+.cm-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─── Panel ────────────────────────────────────────────────────────────────────── */
+.cm-panel {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.cm-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+
+.cm-panel-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cm-panel-body { padding: 1.25rem; }
+
+/* ─── API Key Setup ──────────────────────────────────────────────────────────── */
+.cm-api-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.cm-api-row input {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Table ────────────────────────────────────────────────────────────────────── */
+.cm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.cm-table th {
+  text-align: left;
+  padding: 0.65rem 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+}
+
+.cm-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.cm-table tr:last-child td { border-bottom: none; }
+.cm-table tr:hover td { background: var(--bg-tertiary); }
+
+/* ─── Mapping Select ─────────────────────────────────────────────────────────── */
+.cm-map-select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  max-width: 220px;
+}
+
+/* ─── Rate Input ─────────────────────────────────────────────────────────────── */
+.cm-rate-input {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-primary);
+  max-width: 130px;
+}
+
+.cm-rate-input span {
+  padding: 0.4rem 0.5rem;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border-right: 1px solid var(--border-color);
+}
+
+.cm-rate-input input {
+  border: none;
+  padding: 0.4rem 0.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  width: 70px;
+  border-radius: 0;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────────────────────────── */
+.cm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cm-btn-primary { background: var(--accent-primary); color: white; }
+.cm-btn-primary:hover { background: var(--accent-hover); }
+.cm-btn-primary:disabled { background: var(--border-color); color: var(--text-muted); cursor: not-allowed; }
+
+.cm-btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+.cm-btn-secondary:hover { background: var(--border-color); }
+
+.cm-btn-danger { background: rgba(239,68,68,0.1); color: #EF4444; }
+.cm-btn-danger:hover { background: rgba(239,68,68,0.2); }
+
+.cm-btn-sm { padding: 0.35rem 0.7rem; font-size: 0.8rem; }
+
+.cm-btn.spinning svg { animation: spin 1s linear infinite; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ─── Log Item ────────────────────────────────────────────────────────────────── */
+.cm-log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cm-log-item:last-child { border-bottom: none; }
+
+.cm-log-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.cm-log-dot.success { background: #10B981; }
+.cm-log-dot.failed { background: #EF4444; }
+.cm-log-dot.pending { background: #F59E0B; }
+
+.cm-log-body { flex: 1; }
+.cm-log-message { font-size: 0.875rem; color: var(--text-primary); }
+.cm-log-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+/* ─── Webhook Log ─────────────────────────────────────────────────────────────── */
+.cm-webhook-tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+/* ─── Empty State ─────────────────────────────────────────────────────────────── */
+.cm-empty {
+  text-align: center;
+  padding: 2.5rem;
+  color: var(--text-secondary);
+}
+.cm-empty svg { opacity: 0.3; margin-bottom: 0.75rem; }
+.cm-empty p { font-size: 0.9rem; }
+
+/* ─── Loading ─────────────────────────────────────────────────────────────────── */
+.cm-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}

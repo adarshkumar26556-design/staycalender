@@ -5,6 +5,11 @@ const roomSchema = new mongoose.Schema({
   roomNumber: { type: String, required: true },
   category: { type: String, default: 'Standard' },
   status: { type: String, enum: ['available', 'maintenance'], default: 'available' },
+  channelMappings: [{
+    channel: { type: String },
+    channelRoomId: { type: String },
+    channelRatePlanId: { type: String }
+  }]
 }, { timestamps: true });
 
 // Prevent duplicate room numbers within the same property

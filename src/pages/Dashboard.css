@@ -1,0 +1,537 @@
+/* Dashboard Page - Zotel.ai inspired */
+.dashboard-page {
+  padding-bottom: 2rem;
+}
+
+.dashboard-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+  color: var(--text-muted);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.dashboard-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.dashboard-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Occupancy Ring */
+.occupancy-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.occ-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent-primary) var(--pct), var(--bg-tertiary) 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.occ-ring::before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: var(--bg-secondary);
+  border-radius: 50%;
+}
+
+.occ-value {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.occ-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.kpi-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+
+.kpi-revenue::before { background: linear-gradient(90deg, #10b981, #06b6d4); }
+.kpi-bookings::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+.kpi-occupied::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+.kpi-guests::before { background: linear-gradient(90deg, #ec4899, #f97316); }
+
+.kpi-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kpi-revenue .kpi-icon { background: rgba(16,185,129,0.12); color: #10b981; }
+.kpi-bookings .kpi-icon { background: rgba(59,130,246,0.12); color: #3b82f6; }
+.kpi-occupied .kpi-icon { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.kpi-guests .kpi-icon { background: rgba(236,72,153,0.12); color: #ec4899; }
+
+.kpi-body {
+  flex: 1;
+}
+
+.kpi-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.kpi-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.1rem;
+}
+
+.kpi-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.kpi-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.kpi-trend.positive {
+  background: rgba(16,185,129,0.12);
+  color: #10b981;
+}
+
+.kpi-trend.negative {
+  background: rgba(239,68,68,0.12);
+  color: #ef4444;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.dash-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.dash-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.dash-card-wide {
+  grid-column: 1 / -1;
+}
+
+.dash-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.dash-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dash-card-title h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.icon-success { color: #10b981; }
+.icon-warning { color: #f59e0b; }
+.icon-primary { color: #3b82f6; }
+.icon-gold { color: #f59e0b; }
+
+.dash-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+.badge-success { background: rgba(16,185,129,0.12); color: #10b981; }
+.badge-warning { background: rgba(245,158,11,0.12); color: #f59e0b; }
+
+/* Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: var(--bg-tertiary);
+  transition: background 0.2s;
+}
+
+.activity-item:hover { background: var(--accent-light); }
+
+.guest-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.guest-avatar.checkout {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.activity-info {
+  flex: 1;
+}
+
+.activity-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.activity-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.empty-state-sm {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* WhatsApp Button */
+.wa-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #25D366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  border: none;
+}
+
+.wa-btn:hover {
+  background: #128C7E;
+  transform: scale(1.1);
+}
+
+.wa-btn-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.75rem;
+  background: #25D366;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wa-btn-sm:hover { background: #128C7E; }
+
+/* Mini Table */
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mini-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mini-table td {
+  padding: 0.75rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.mini-table tr:last-child td { border-bottom: none; }
+.mini-table tr:hover td { background: var(--bg-tertiary); }
+
+.mini-guest {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mini-name { font-weight: 500; color: var(--text-primary); }
+.mini-meta { font-size: 0.75rem; color: var(--text-muted); }
+
+.room-chip {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-primary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.source-tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.source-tag.source-walkin { background: rgba(16,185,129,0.1); color: #10b981; }
+.source-tag.source-mmt { background: rgba(239,68,68,0.1); color: #ef4444; }
+.source-tag.source-bookingcom { background: rgba(37,99,235,0.1); color: #2563eb; }
+.source-tag.source-agoda { background: rgba(139,92,246,0.1); color: #8b5cf6; }
+
+.amount-cell {
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* Property Overview */
+.property-overview {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.stat-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--color, #3b82f6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.stat-circle:hover { transform: scale(1.05); }
+
+.stat-num {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(var(--color), var(--text-primary));
+  line-height: 1;
+  color: var(--color, var(--text-primary));
+}
+
+.stat-nm {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.occupancy-visual {
+  padding: 0 1rem;
+}
+
+.occ-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.occ-bar-label strong { color: var(--text-primary); }
+
+.occ-bar-bg {
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.occ-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 20px;
+  transition: width 0.8s ease;
+}
+
+.occ-bar-fill.secondary {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .property-overview { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+  .occupancy-visual { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .kpi-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .dash-card-wide { grid-column: 1; }
+  .kpi-value { font-size: 1.2rem; }
+  .property-overview { grid-template-columns: repeat(3, auto); gap: 1rem; }
+  .occupancy-visual { grid-column: 1 / -1; padding: 0; }
+  .mini-table { font-size: 0.8rem; }
+  .upcoming-table { overflow-x: auto; }
+}

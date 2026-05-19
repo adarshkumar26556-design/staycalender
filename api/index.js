@@ -8,6 +8,10 @@ const authRoutes = require('../backend/routes/authRoutes');
 const propertyRoutes = require('../backend/routes/propertyRoutes');
 const roomRoutes = require('../backend/routes/roomRoutes');
 const bookingRoutes = require('../backend/routes/bookingRoutes');
+const channelManagerRoutes = require('../backend/routes/channelManagerRoutes');
+// Register models so Mongoose knows about them
+require('../backend/models/SyncLog');
+require('../backend/models/WebhookLog');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +40,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/channel-manager', channelManagerRoutes);
 
 app.get('/api/status', (req, res) => {
   const dbState = mongoose.connection.readyState;

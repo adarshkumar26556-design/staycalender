@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { apiFetch } from '../utils/api';
-import { Trash2, Search, Calendar, User, Edit2, X, Save } from 'lucide-react';
+import { Trash2, Search, Calendar, User, Edit2, X, Save, MessageSquare } from 'lucide-react';
 import './AdminPanel.css'; // Reusing established table styles
 
 const Bookings = () => {
@@ -49,6 +49,14 @@ const Bookings = () => {
     } catch (err) {
       alert(err.message);
     }
+  };
+
+  const sendWhatsApp = (b) => {
+    const mobile = b.mobileNumber?.replace(/\D/g, '');
+    const checkIn = new Date(b.checkInDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const checkOut = new Date(b.checkOutDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const msg = `Hi ${b.customerName}! 🏨\n\nYour booking is confirmed.\n✅ Room: ${b.roomId?.roomNumber || 'N/A'}\n📅 Check-in: ${checkIn}\n📅 Check-out: ${checkOut}\n💰 Amount: ₹${b.amount}\n\nWe look forward to hosting you! 🙏`;
+    window.open(`https://wa.me/${mobile}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   const openEditModal = (booking) => {
@@ -148,7 +156,17 @@ const Bookings = () => {
                   </td>
                   <td style={{ fontWeight: 600 }}>₹{b.amount}</td>
                   <td>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                      <button
+                        style={{
+                          display:'inline-flex', alignItems:'center', gap:'0.3rem',
+                          padding:'0.3rem 0.65rem', background:'#25D366', color:'white',
+                          borderRadius:'6px', fontSize:'0.78rem', fontWeight:'500', border:'none', cursor:'pointer'
+                        }}
+                        onClick={() => sendWhatsApp(b)} title="Send WhatsApp confirmation"
+                      >
+                        <MessageSquare size={14} /> WA
+                      </button>
                       <button className="icon-btn" onClick={() => openEditModal(b)} title="Edit">
                         <Edit2 size={18} />
                       </button>

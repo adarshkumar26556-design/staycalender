@@ -1,19 +1,24 @@
 import { useContext } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { LayoutDashboard, Calendar as CalendarIcon, IndianRupee, Settings, LogOut, ChevronLeft, ChevronRight, Building2 } from 'lucide-react';
+import {
+  LayoutDashboard, Calendar as CalendarIcon, IndianRupee, Settings,
+  LogOut, ChevronLeft, ChevronRight, Building2, Globe, Users, BedDouble
+} from 'lucide-react';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user, logout } = useContext(AuthContext);
-  const location = useLocation();
 
   const navItems = user?.role === 'Admin' ? [
-    { name: 'Admin Panel', path: '/admin', icon: <Settings size={20} /> }
+    { name: 'Admin Panel', path: '/admin', icon: <Settings size={20} /> },
+    { name: 'Channel Manager', path: '/channel-manager', icon: <Globe size={20} /> }
   ] : [
-    { name: 'Calendar', path: '/', icon: <CalendarIcon size={20} /> },
+    { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
+    { name: 'Calendar', path: '/calendar', icon: <CalendarIcon size={20} /> },
     { name: 'Bookings', path: '/bookings', icon: <Building2 size={20} /> },
-    { name: 'Room Status', path: '/status', icon: <LayoutDashboard size={20} /> },
-    { name: 'Revenue', path: '/revenue', icon: <IndianRupee size={20} /> },
+    { name: 'Guest CRM', path: '/guests', icon: <Users size={20} /> },
+    { name: 'Room Status', path: '/status', icon: <BedDouble size={20} /> },
+    { name: 'Revenue', path: '/revenue', icon: <IndianRupee size={20} /> }
   ];
 
   return (
@@ -21,7 +26,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <div className="sidebar-header">
         <div className="logo">
           <Building2 color="var(--accent-primary)" />
-          {isOpen && <span>StaySync</span>}
+          {isOpen && <span>StayCalendar</span>}
         </div>
         <button className="toggle-btn" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
@@ -33,7 +38,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           <NavLink
             key={item.path}
             to={item.path}
-            className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
+            end={item.path === '/'}
+            className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             title={!isOpen ? item.name : ''}
             onClick={() => { if (window.innerWidth <= 768) setIsOpen(false); }}
           >

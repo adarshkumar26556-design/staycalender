@@ -129,3 +129,99 @@
     font-size: 1.35rem;
   }
 }
+
+/* ---- Smart Insights (Zotel.ai style) ---- */
+.smart-insights-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.smart-insights-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ef4444, #8b5cf6);
+}
+
+.si-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+.si-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.si-badge {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+.si-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.si-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  border-left: 3px solid;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.si-card strong { color: var(--text-primary); }
+
+.si-card.si-info {
+  background: rgba(59,130,246,0.06);
+  border-color: #3b82f6;
+}
+.si-card.si-tip {
+  background: rgba(139,92,246,0.06);
+  border-color: #8b5cf6;
+}
+.si-card.si-success {
+  background: rgba(16,185,129,0.06);
+  border-color: #10b981;
+}
+.si-card.si-warning {
+  background: rgba(245,158,11,0.06);
+  border-color: #f59e0b;
+}
+
+.si-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.si-card.si-info .si-icon { color: #3b82f6; }
+.si-card.si-tip .si-icon { color: #8b5cf6; }
+.si-card.si-success .si-icon { color: #10b981; }
+.si-card.si-warning .si-icon { color: #f59e0b; }
+
+@media (max-width: 768px) {
+  .si-grid { grid-template-columns: 1fr; }
+}
+
+.mt-8 { margin-top: 1.5rem; }
+

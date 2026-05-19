@@ -16,6 +16,12 @@ export const apiFetch = async (endpoint, method = 'GET', body = null) => {
   const response = await fetch(`${BASE_URL}${endpoint}`, options);
   
   if (!response.ok) {
+    if (response.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+    }
+    
     let errorMessage = 'API request failed';
     try {
       const errorData = await response.json();
