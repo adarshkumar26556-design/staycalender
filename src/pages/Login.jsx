@@ -56,7 +56,7 @@ const Login = () => {
             ))}
           </ul>
           <div className="brand-footer">
-            Inspired by Zotel.ai · Built for Indian Hotels
+            Built for Modern Hospitality
           </div>
         </div>
         {/* Decorative circles */}
